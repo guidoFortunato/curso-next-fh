@@ -3,35 +3,35 @@
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
 
-import * as todosApi from '@/todos/helpers/todos'
+import * as todosApi from "@/todos/helpers/todos";
 import { useRouter } from "next/navigation";
+import { addTodo, deleteCompleted } from "../actions/todo-actions";
 
 export const NewTodo = () => {
+  const router = useRouter();
+  const [description, setDescription] = useState("");
 
-  const router = useRouter()
-  const [description, setDescription] = useState('')
-
-  const onSubmit = async(e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if( description.trim().length === 0 ) return
+    if (description.trim().length === 0) return;
 
-    todosApi.createTodo( description )
-    setDescription('')
-    router.refresh()
-  }
+    // todosApi.createTodo( description )
+    await addTodo(description);
+    setDescription("");
+    // router.refresh()
+  };
 
-  const deleteCompleted = async() => {
-    todosApi.deleteCompletedTodo()
-    router.refresh()
-  }
-  
+  // const deleteCompleted = async () => {
+    // await todosApi.deleteCompletedTodo()
+    // router.refresh()
+  // };
 
   return (
-    <form className="flex w-full" onSubmit={ onSubmit }>
+    <form className="flex w-full" onSubmit={onSubmit}>
       <input
-        onChange={ (e)=>setDescription(e.target.value) }
-        value={ description }
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
         type="text"
         className="w-6/12 -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-sky-500 transition-all"
         placeholder="¿Qué necesita ser hecho?"
@@ -47,7 +47,7 @@ export const NewTodo = () => {
       <span className="flex flex-1"></span>
 
       <button
-        onClick={ () => deleteCompleted() }
+        onClick={() => deleteCompleted()}
         type="button"
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >
