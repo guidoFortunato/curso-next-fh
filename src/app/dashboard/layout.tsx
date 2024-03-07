@@ -1,5 +1,5 @@
 // Admin Dashboard https://tailwindcomponents.com/component/dashboard-12
-import { Sidebar } from "@/components/Sidebar";
+import { Sidebar } from "@/components/sidebar/Sidebar";
 import { TopMenu } from "@/components/TopMenu";
 
 export default function DashboardLayout({
@@ -15,7 +15,9 @@ export default function DashboardLayout({
         <TopMenu />
 
         {/* TODO: Contenido en el Layout.tsx */}
-        <div className="px-6 pt-6 bg-white p-2 m-2 pb-5 rounded">{children}</div>
+        <div className="px-6 pt-6 bg-white p-2 m-2 pb-5 rounded">
+          {children}
+        </div>
       </div>
     </>
   );
